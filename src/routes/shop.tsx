@@ -78,7 +78,7 @@ function ShopPage() {
       <div className="container mx-auto px-4 py-10 grid lg:grid-cols-[260px_1fr] gap-8">
         <aside className="space-y-6">
           <form
-            onSubmit={(e) => { e.preventDefault(); navigate({ search: (s) => ({ ...s, q: searchInput || undefined }) }); }}
+            onSubmit={(e) => { e.preventDefault(); navigate({ search: (s: Search) => ({ ...s, q: searchInput || undefined }) }); }}
             className="relative"
           >
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />

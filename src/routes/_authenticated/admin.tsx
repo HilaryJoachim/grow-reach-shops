@@ -36,12 +36,12 @@ function AdminLayout() {
     );
   }
 
-  const tabs = [
+  const tabs: Array<{ to: "/admin" | "/admin/products" | "/admin/categories" | "/admin/orders"; label: string; exact?: boolean }> = [
     { to: "/admin", label: "Dashboard", exact: true },
     { to: "/admin/products", label: "Products" },
     { to: "/admin/categories", label: "Categories" },
     { to: "/admin/orders", label: "Orders" },
-  ] as const;
+  ];
 
   return (
     <div className="border-b border-border bg-muted/30">

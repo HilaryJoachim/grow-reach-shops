@@ -21,6 +21,7 @@ import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedAdminProductsRouteImport } from './routes/_authenticated/admin/products'
+import { Route as AuthenticatedAdminCategoriesRouteImport } from './routes/_authenticated/admin/categories'
 
 const WholesaleRoute = WholesaleRouteImport.update({
   id: '/wholesale',
@@ -82,6 +83,12 @@ const AuthenticatedAdminProductsRoute =
     path: '/products',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const AuthenticatedAdminCategoriesRoute =
+  AuthenticatedAdminCategoriesRouteImport.update({
+    id: '/categories',
+    path: '/categories',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -93,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/wholesale': typeof WholesaleRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/products/$slug': typeof ProductsSlugRoute
+  '/admin/categories': typeof AuthenticatedAdminCategoriesRoute
   '/admin/products': typeof AuthenticatedAdminProductsRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
 }
@@ -105,6 +113,7 @@ export interface FileRoutesByTo {
   '/shop': typeof ShopRoute
   '/wholesale': typeof WholesaleRoute
   '/products/$slug': typeof ProductsSlugRoute
+  '/admin/categories': typeof AuthenticatedAdminCategoriesRoute
   '/admin/products': typeof AuthenticatedAdminProductsRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
 }
@@ -120,6 +129,7 @@ export interface FileRoutesById {
   '/wholesale': typeof WholesaleRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/products/$slug': typeof ProductsSlugRoute
+  '/_authenticated/admin/categories': typeof AuthenticatedAdminCategoriesRoute
   '/_authenticated/admin/products': typeof AuthenticatedAdminProductsRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
@@ -135,6 +145,7 @@ export interface FileRouteTypes {
     | '/wholesale'
     | '/admin'
     | '/products/$slug'
+    | '/admin/categories'
     | '/admin/products'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
@@ -147,6 +158,7 @@ export interface FileRouteTypes {
     | '/shop'
     | '/wholesale'
     | '/products/$slug'
+    | '/admin/categories'
     | '/admin/products'
     | '/admin'
   id:
@@ -161,6 +173,7 @@ export interface FileRouteTypes {
     | '/wholesale'
     | '/_authenticated/admin'
     | '/products/$slug'
+    | '/_authenticated/admin/categories'
     | '/_authenticated/admin/products'
     | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
@@ -263,15 +276,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminProductsRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/categories': {
+      id: '/_authenticated/admin/categories'
+      path: '/categories'
+      fullPath: '/admin/categories'
+      preLoaderRoute: typeof AuthenticatedAdminCategoriesRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
   }
 }
 
 interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminCategoriesRoute: typeof AuthenticatedAdminCategoriesRoute
   AuthenticatedAdminProductsRoute: typeof AuthenticatedAdminProductsRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminCategoriesRoute: AuthenticatedAdminCategoriesRoute,
   AuthenticatedAdminProductsRoute: AuthenticatedAdminProductsRoute,
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
 }

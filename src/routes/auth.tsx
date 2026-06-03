@@ -22,13 +22,9 @@ function AuthPage() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, session) => {
-      if (session) navigate({ to: "/admin", replace: true });
-    });
     supabase.auth.getUser().then(({ data }) => {
       if (data.user) navigate({ to: "/admin", replace: true });
     });
-    return () => subscription.unsubscribe();
   }, [navigate]);
 
   async function onSubmit(e: React.FormEvent) {
@@ -41,16 +37,23 @@ function AuthPage() {
           options: { emailRedirectTo: window.location.origin + "/admin" },
         });
         if (error) throw error;
-        toast.success("Account created. Signing you in…");
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
       }
-      // Claim admin if no admin exists yet (first seller account).
+      // Wait for session to be persisted before calling claim (avoids race with bearer attacher).
+      for (let i = 0; i < 10; i++) {
+        const { data } = await supabase.auth.getSession();
+        if (data.session?.access_token) break;
+        await new Promise((r) => setTimeout(r, 150));
+      }
       try {
         const res = await claim();
         if (res.claimed) toast.success("Admin access granted.");
-      } catch { /* ignore */ }
+      } catch (err) {
+        console.error("claimAdmin failed", err);
+      }
+      navigate({ to: "/admin", replace: true });
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Authentication failed");
     } finally {

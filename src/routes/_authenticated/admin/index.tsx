@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
 import { listOrdersAdmin, listProductsAdmin } from "@/lib/admin.functions";
-import { formatTSh } from "@/lib/format";
+import { formatTsh } from "@/lib/format";
 import { Package, ShoppingBag, TrendingUp } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/admin/")({
@@ -20,7 +20,7 @@ function AdminDashboard() {
   const stats = [
     { label: "Products", value: products.data?.length ?? 0, icon: Package },
     { label: "Orders", value: orders.data?.length ?? 0, icon: ShoppingBag },
-    { label: "Revenue", value: formatTSh(revenue), icon: TrendingUp },
+    { label: "Revenue", value: formatTsh(revenue), icon: TrendingUp },
   ];
 
   return (
@@ -46,7 +46,7 @@ function AdminDashboard() {
                 <div className="font-medium">{o.customer_name}</div>
                 <div className="text-muted-foreground text-xs">{new Date(o.created_at).toLocaleString()}</div>
               </div>
-              <div className="font-semibold text-primary">{formatTSh(Number(o.total))}</div>
+              <div className="font-semibold text-primary">{formatTsh(Number(o.total))}</div>
             </div>
           ))}
           {(orders.data ?? []).length === 0 && <div className="p-6 text-center text-sm text-muted-foreground">No orders yet.</div>}

@@ -68,6 +68,7 @@ export function SiteHeader() {
               </span>
             )}
           </Link>
+          <Link to="/auth" className="hidden md:inline text-xs text-muted-foreground hover:text-primary px-2">Admin</Link>
           <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setOpen(!open)} aria-label="Menu">
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>

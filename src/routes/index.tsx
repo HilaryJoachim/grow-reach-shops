@@ -9,7 +9,7 @@ import heroImg from "@/assets/hero.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AFROGROW — Premium Beauty, Supplements & Gym Gear" },
+      { title: "AFROGLOW — Premium Beauty, Supplements & Gym Gear" },
       { name: "description", content: "Shop hair growth oils, whey protein, creatine, pre-workout, gym accessories and more. Retail & wholesale pricing with WhatsApp ordering." },
     ],
   }),

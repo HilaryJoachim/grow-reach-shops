@@ -18,8 +18,8 @@ export const Route = createFileRoute("/shop")({
   }),
   head: () => ({
     meta: [
-      { title: "Shop — AFROGROW" },
-      { name: "description", content: "Browse all AFROGROW beauty, supplement and gym products. Filter by category, search by name." },
+      { title: "Shop — AFROGLOW" },
+      { name: "description", content: "Browse all AFROGLOW beauty, supplement and gym products. Filter by category, search by name." },
     ],
   }),
   component: ShopPage,

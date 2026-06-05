@@ -4,7 +4,7 @@ import { whatsappLink } from "@/lib/whatsapp";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({ meta: [{ title: "Contact — AFROGROW" }, { name: "description", content: "Reach AFROGROW on WhatsApp for orders, wholesale and support." }] }),
+  head: () => ({ meta: [{ title: "Contact — AFROGLOW" }, { name: "description", content: "Reach AFROGLOW on WhatsApp for orders, wholesale and support." }] }),
   component: () => (
     <div className="container mx-auto px-4 py-16 max-w-3xl">
       <p className="text-xs uppercase tracking-widest text-primary font-semibold">Contact</p>
@@ -12,7 +12,7 @@ export const Route = createFileRoute("/contact")({
       <p className="mt-4 text-muted-foreground">The fastest way to reach us is WhatsApp. We respond in minutes.</p>
 
       <div className="mt-8 grid sm:grid-cols-2 gap-4">
-        <a href={whatsappLink("Hello AFROGROW")} target="_blank" rel="noopener" className="bg-ink text-ink-foreground rounded-lg p-6 hover:bg-primary hover:text-primary-foreground transition-colors">
+        <a href={whatsappLink("Hello AFROGLOW")} target="_blank" rel="noopener" className="bg-ink text-ink-foreground rounded-lg p-6 hover:bg-primary hover:text-primary-foreground transition-colors">
           <MessageCircle className="h-7 w-7" />
           <div className="font-display text-xl mt-4">WhatsApp</div>
           <div className="text-sm opacity-80 mt-1">+255 795 908 230</div>
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/contact")({
         <div className="bg-card border border-border rounded-lg p-6">
           <Mail className="h-7 w-7 text-primary" />
           <div className="font-display text-xl mt-4">Email</div>
-          <div className="text-sm text-muted-foreground mt-1">orders@afrogrow.com</div>
+          <div className="text-sm text-muted-foreground mt-1">orders@afroglow.com</div>
         </div>
         <div className="bg-card border border-border rounded-lg p-6 sm:col-span-2">
           <MapPin className="h-7 w-7 text-primary" />
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/contact")({
 
       <div className="mt-10">
         <Button asChild size="lg">
-          <a href={whatsappLink("Hello AFROGROW, I'd like to place an order.")} target="_blank" rel="noopener">
+          <a href={whatsappLink("Hello AFROGLOW, I'd like to place an order.")} target="_blank" rel="noopener">
             <MessageCircle className="h-4 w-4 mr-1" /> Start Chat
           </a>
         </Button>

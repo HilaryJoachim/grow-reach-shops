@@ -13,7 +13,7 @@ import { z } from "zod";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/cart")({
-  head: () => ({ meta: [{ title: "Your Cart — AFROGROW" }] }),
+  head: () => ({ meta: [{ title: "Your Cart — AFROGLOW" }] }),
   component: CartPage,
 });
 
@@ -43,7 +43,7 @@ function CartPage() {
       return `${idx + 1}. ${i.name} — Qty ${i.qty} × ${formatTsh(u)} = ${formatTsh(u * i.qty)}`;
     }).join("\n");
 
-    const msg = `Hello AFROGROW,
+    const msg = `Hello AFROGLOW,
 
 I would like to place an order.
 

@@ -25,7 +25,7 @@ export function SiteHeader() {
       <div className="bg-ink text-ink-foreground text-xs">
         <div className="container mx-auto flex justify-between items-center px-4 py-1.5">
           <span>Beauty • Supplements • Gym — Retail & Wholesale</span>
-          <a href={whatsappLink("Hello AFROGROW, I have a question.")} target="_blank" rel="noopener" className="hidden sm:inline text-primary hover:underline">
+          <a href={whatsappLink("Hello AFROGLOW, I have a question.")} target="_blank" rel="noopener" className="hidden sm:inline text-primary hover:underline">
             +255 795 908 230
           </a>
         </div>
@@ -34,7 +34,7 @@ export function SiteHeader() {
         <Link to="/" className="flex items-center gap-2">
           <div className="h-9 w-9 bg-primary text-primary-foreground grid place-items-center font-display text-lg rounded-sm">A</div>
           <div className="leading-none">
-            <div className="font-display text-2xl tracking-wide">AFROGROW</div>
+            <div className="font-display text-2xl tracking-wide">AFROGLOW</div>
             <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Beauty • Fitness</div>
           </div>
         </Link>
@@ -54,7 +54,7 @@ export function SiteHeader() {
         </nav>
         <div className="flex items-center gap-2">
           <a
-            href={whatsappLink("Hello AFROGROW, I'd like to place an order.")}
+            href={whatsappLink("Hello AFROGLOW, I'd like to place an order.")}
             target="_blank" rel="noopener"
             className="hidden md:inline-flex items-center gap-1.5 text-sm font-medium bg-ink text-ink-foreground hover:bg-primary transition-colors rounded-md px-3 py-2"
           >

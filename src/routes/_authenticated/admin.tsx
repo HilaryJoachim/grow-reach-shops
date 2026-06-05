@@ -47,7 +47,7 @@ function AdminLayout() {
     <div className="border-b border-border bg-muted/30">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between gap-4">
         <div>
-          <div className="text-xs uppercase tracking-widest text-muted-foreground">AFROGROW</div>
+          <div className="text-xs uppercase tracking-widest text-muted-foreground">AFROGLOW</div>
           <h1 className="font-display text-2xl">Admin Panel</h1>
         </div>
         <Button variant="outline" size="sm" onClick={signOut}><LogOut className="h-4 w-4" /> Sign out</Button>

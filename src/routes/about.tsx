@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({ meta: [{ title: "About — AFROGROW" }, { name: "description", content: "AFROGROW supplies premium beauty products, sports nutrition and fitness accessories across Tanzania." }] }),
+  head: () => ({ meta: [{ title: "About — AFROGLOW" }, { name: "description", content: "AFROGLOW supplies premium beauty products, sports nutrition and fitness accessories across Tanzania." }] }),
   component: () => (
     <div className="container mx-auto px-4 py-16 max-w-3xl">
       <p className="text-xs uppercase tracking-widest text-primary font-semibold">About</p>
-      <h1 className="font-display text-5xl mt-1">AFROGROW</h1>
+      <h1 className="font-display text-5xl mt-1">AFROGLOW</h1>
       <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-        AFROGROW is a trusted supplier of beauty products, sports nutrition supplements, and fitness accessories.
+        AFROGLOW is a trusted supplier of beauty products, sports nutrition supplements, and fitness accessories.
         We serve individual customers, gyms, salons, resellers and wholesale buyers across Tanzania with a simple promise:
         authentic products, fair pricing, and fast WhatsApp ordering.
       </p>

@@ -50,9 +50,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "AFROGROW — Beauty, Supplements & Gym Accessories" },
+      { title: "AFROGLOW — Beauty, Supplements & Gym Accessories" },
       { name: "description", content: "Premium beauty products, sports nutrition and gym accessories at retail and wholesale prices. WhatsApp ordering, fast response, trusted supplier." },
-      { property: "og:title", content: "AFROGROW — Beauty, Supplements & Gym" },
+      { property: "og:title", content: "AFROGLOW — Beauty, Supplements & Gym" },
       { property: "og:description", content: "Premium beauty, supplements and gym gear at retail & wholesale prices." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -4,12 +4,14 @@ import { ArrowRight, Truck, ShieldCheck, MessageCircle, Sparkles, Dumbbell, Flam
 import { supabase } from "@/integrations/supabase/client";
 import { ProductCard, type ProductCardData } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
-import heroImg from "@/assets/hero.jpg";
+import heroBeauty from "@/assets/hero-beauty.jpg";
+import heroSupplements from "@/assets/hero-supplements.jpg";
+import heroGym from "@/assets/hero-gym.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AFROGROW — Premium Beauty, Supplements & Gym Gear" },
+      { title: "AFROGLOW — Premium Beauty, Supplements & Gym Gear" },
       { name: "description", content: "Shop hair growth oils, whey protein, creatine, pre-workout, gym accessories and more. Retail & wholesale pricing with WhatsApp ordering." },
     ],
   }),
@@ -45,28 +47,48 @@ function HomePage() {
     <div>
       {/* HERO */}
       <section className="relative bg-ink text-ink-foreground overflow-hidden">
-        <img src={heroImg} alt="" width={1920} height={1080} className="absolute inset-0 h-full w-full object-cover opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-transparent" />
-        <div className="relative container mx-auto px-4 py-24 md:py-32 max-w-5xl">
-          <div className="inline-flex items-center gap-2 bg-primary/15 text-primary px-3 py-1 rounded-full text-xs uppercase tracking-widest font-semibold">
-            <Flame className="h-3 w-3" /> Retail & Wholesale
+        <div className="container mx-auto px-4 py-16 md:py-20 grid lg:grid-cols-2 gap-12 items-center">
+          <div className="relative z-10">
+            <div className="inline-flex items-center gap-2 bg-primary/15 text-primary px-3 py-1 rounded-full text-xs uppercase tracking-widest font-semibold">
+              <Flame className="h-3 w-3" /> Beauty • Supplements • Gym
+            </div>
+            <h1 className="mt-4 font-display text-5xl md:text-7xl leading-[0.95]">
+              Transform Your <span className="text-primary">Beauty</span> & <span className="text-primary">Fitness</span> Journey
+            </h1>
+            <p className="mt-5 text-lg text-white/80 max-w-xl">
+              Premium cosmetics, sports nutrition supplements, and gym accessories — handpicked, authentic, delivered by WhatsApp.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button asChild size="lg" className="text-base">
+                <Link to="/shop">Shop Now <ArrowRight className="ml-1 h-4 w-4" /></Link>
+              </Button>
+            </div>
           </div>
-          <h1 className="mt-4 font-display text-5xl md:text-7xl leading-[0.95] max-w-3xl">
-            Transform Your <span className="text-primary">Beauty</span> & <span className="text-primary">Fitness</span> Journey
-          </h1>
-          <p className="mt-5 text-lg text-white/80 max-w-xl">
-            Premium cosmetics, sports nutrition supplements, and gym accessories delivered with retail and wholesale pricing.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild size="lg" className="text-base">
-              <Link to="/shop">Shop Now <ArrowRight className="ml-1 h-4 w-4" /></Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="text-base bg-transparent text-white border-white/30 hover:bg-white hover:text-ink">
-              <Link to="/wholesale">Wholesale Pricing</Link>
-            </Button>
+
+          {/* 3-image collage */}
+          <div className="grid grid-cols-2 gap-3 md:gap-4 relative">
+            <div className="row-span-2 relative rounded-lg overflow-hidden border border-white/10 shadow-2xl">
+              <img src={heroBeauty} alt="Glowing skin with premium beauty product" width={1024} height={1280} className="h-full w-full object-cover aspect-[3/4]" />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-ink to-transparent p-3">
+                <span className="text-xs uppercase tracking-widest text-primary font-semibold">Beauty</span>
+              </div>
+            </div>
+            <div className="relative rounded-lg overflow-hidden border border-white/10 shadow-xl">
+              <img src={heroSupplements} alt="Athlete drinking a protein supplement shake" loading="lazy" width={1024} height={1024} className="h-full w-full object-cover aspect-square" />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-ink to-transparent p-3">
+                <span className="text-xs uppercase tracking-widest text-primary font-semibold">Supplements</span>
+              </div>
+            </div>
+            <div className="relative rounded-lg overflow-hidden border border-white/10 shadow-xl">
+              <img src={heroGym} alt="Fit man with gym accessories" loading="lazy" width={1024} height={1024} className="h-full w-full object-cover aspect-square" />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-ink to-transparent p-3">
+                <span className="text-xs uppercase tracking-widest text-primary font-semibold">Gym</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
+
 
       {/* CATEGORIES */}
       <section className="container mx-auto px-4 py-16">

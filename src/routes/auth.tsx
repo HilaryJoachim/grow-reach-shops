@@ -9,7 +9,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { claimAdminIfFirst } from "@/lib/admin.functions";
 
 export const Route = createFileRoute("/auth")({
-  head: () => ({ meta: [{ title: "Admin Login — AFROGROW" }] }),
+  head: () => ({ meta: [{ title: "Admin Login — AFROGLOW" }] }),
   component: AuthPage,
 });
 

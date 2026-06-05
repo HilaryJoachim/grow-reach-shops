@@ -38,7 +38,7 @@ function ProductDetail() {
   const total = unit * qty;
   const isWholesale = qty >= product.moq;
 
-  const orderMsg = `Hello AFROGROW,
+  const orderMsg = `Hello AFROGLOW,
 
 I would like to order:
 

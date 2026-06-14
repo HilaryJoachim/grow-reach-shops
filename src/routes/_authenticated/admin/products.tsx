@@ -8,8 +8,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { Pencil, Plus, Trash2 } from "lucide-react";
+import { ImageIcon, Pencil, Plus, Trash2 } from "lucide-react";
 import { formatTsh } from "@/lib/format";
+import { ImageUploader } from "@/components/ImageUploader";
 
 export const Route = createFileRoute("/_authenticated/admin/products")({
   component: ProductsAdmin,
@@ -92,8 +93,14 @@ function ProductsAdmin() {
             <Field label="Retail price (TSh)"><Input type="number" min={0} required value={editing.retail_price} onChange={(e) => setEditing({ ...editing, retail_price: Number(e.target.value) })} /></Field>
             <Field label="Wholesale price (TSh)"><Input type="number" min={0} required value={editing.wholesale_price} onChange={(e) => setEditing({ ...editing, wholesale_price: Number(e.target.value) })} /></Field>
             <Field label="MOQ"><Input type="number" min={1} required value={editing.moq} onChange={(e) => setEditing({ ...editing, moq: Number(e.target.value) })} /></Field>
-            <Field label="Image URL"><Input value={editing.image_url} onChange={(e) => setEditing({ ...editing, image_url: e.target.value })} /></Field>
           </div>
+          {/* ── Image upload ── */}
+          <Field label="Product Image">
+            <ImageUploader
+              value={editing.image_url}
+              onChange={(url) => setEditing({ ...editing, image_url: url })}
+            />
+          </Field>
           <Field label="Description"><Textarea value={editing.description} onChange={(e) => setEditing({ ...editing, description: e.target.value })} /></Field>
           <div className="grid sm:grid-cols-2 gap-4">
             <Field label="Benefits"><Textarea value={editing.benefits} onChange={(e) => setEditing({ ...editing, benefits: e.target.value })} /></Field>
@@ -113,7 +120,10 @@ function ProductsAdmin() {
       <div className="border border-border rounded-lg divide-y divide-border bg-card">
         {(products ?? []).map((p) => (
           <div key={p.id} className="p-4 flex items-center gap-4">
-            {p.image_url && <img src={p.image_url} alt="" className="h-12 w-12 object-cover rounded" />}
+            {p.image_url
+              ? <img src={p.image_url} alt={p.name} className="h-12 w-12 object-cover rounded-lg border border-border flex-shrink-0" />
+              : <div className="h-12 w-12 rounded-lg border border-dashed border-border bg-muted flex items-center justify-center flex-shrink-0"><ImageIcon className="h-5 w-5 text-muted-foreground" /></div>
+            }
             <div className="flex-1 min-w-0">
               <div className="font-medium truncate">{p.name}</div>
               <div className="text-xs text-muted-foreground">{p.category_slug} • {formatTsh(Number(p.retail_price))} / {formatTsh(Number(p.wholesale_price))} (MOQ {p.moq})</div>

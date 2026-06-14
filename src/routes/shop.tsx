@@ -11,6 +11,48 @@ interface Search {
   q?: string;
 }
 
+// ── Brand taxonomy ────────────────────────────────────────────────────────────
+const BRAND_GROUPS = [
+  {
+    label: "Afro Glow",
+    slug: "afro-glow",
+    children: [
+      { label: "Skin Care", slug: "skin-care" },
+      { label: "Body Care", slug: "body-care" },
+      { label: "Hair Care", slug: "hair-care" },
+      { label: "Glow Care", slug: "glow-care" },
+      { label: "Men's Essential", slug: "mens-essential" },
+    ],
+  },
+  {
+    label: "Afro Gain",
+    slug: "afro-gain",
+    children: [
+      { label: "Whey Protein", slug: "whey-protein" },
+      { label: "Mass Gainer", slug: "mass-gainer" },
+      { label: "Creatine", slug: "creatine" },
+      { label: "Pre Workout", slug: "pre-workout" },
+      { label: "BCAA / EAA", slug: "bcaa-eaa" },
+      { label: "Vitamins & Minerals Supplements", slug: "vitamins-minerals" },
+    ],
+  },
+  {
+    label: "Afro Wear",
+    slug: "afro-wear",
+    children: [
+      { label: "Men Wear", slug: "men-wear" },
+      { label: "Women Wear", slug: "women-wear" },
+      { label: "Gym Accessories", slug: "gym-accessories" },
+    ],
+  },
+] as const;
+
+// Flat list of every slug that belongs to a given main group (used for filtering)
+function childSlugsOf(groupSlug: string): string[] {
+  const group = BRAND_GROUPS.find((g) => g.slug === groupSlug);
+  return group ? group.children.map((c) => c.slug) : [];
+}
+
 export const Route = createFileRoute("/shop")({
   validateSearch: (s: Record<string, unknown>): Search => ({
     category: typeof s.category === "string" ? s.category : undefined,
@@ -19,7 +61,11 @@ export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
       { title: "Shop — AFROGLOW" },
-      { name: "description", content: "Browse all AFROGLOW beauty, supplement and gym products. Filter by category, search by name." },
+      {
+        name: "description",
+        content:
+          "Browse all AFROGLOW beauty, supplement and gym products. Filter by category, search by name.",
+      },
     ],
   }),
   component: ShopPage,
@@ -30,20 +76,26 @@ function ShopPage() {
   const navigate = Route.useNavigate();
   const [searchInput, setSearchInput] = useState(q ?? "");
 
-  const { data: cats } = useQuery({
-    queryKey: ["categories"],
-    queryFn: async () => {
-      const { data, error } = await supabase.from("categories").select("*").order("sort_order");
-      if (error) throw error;
-      return data;
-    },
-  });
+  // Determine which slugs to filter by:
+  //  • no category → fetch all
+  //  • top-level group slug → filter by all its children
+  //  • sub-category slug → filter directly by that slug
+  const isGroupSlug = BRAND_GROUPS.some((g) => g.slug === category);
+  const activeSlugs: string[] | undefined = !category
+    ? undefined
+    : isGroupSlug
+      ? childSlugsOf(category)
+      : [category];
 
   const { data: products, isLoading } = useQuery({
     queryKey: ["products", category ?? "all"],
     queryFn: async () => {
-      let query = supabase.from("products").select("id,slug,name,image_url,retail_price,wholesale_price,moq,category_slug");
-      if (category) query = query.eq("category_slug", category);
+      let query = supabase
+        .from("products")
+        .select("id,slug,name,image_url,retail_price,wholesale_price,moq,category_slug");
+      if (activeSlugs) {
+        query = query.in("category_slug", activeSlugs);
+      }
       const { data, error } = await query.order("created_at", { ascending: false });
       if (error) throw error;
       return data as ProductCardData[];
@@ -57,16 +109,6 @@ function ShopPage() {
     return products.filter((p) => p.name.toLowerCase().includes(needle));
   }, [products, q]);
 
-  const groups = useMemo(() => {
-    const map = new Map<string, typeof cats>();
-    (cats ?? []).forEach((c) => {
-      const g = c.parent ?? "Other";
-      if (!map.has(g)) map.set(g, []);
-      map.get(g)!.push(c);
-    });
-    return Array.from(map.entries());
-  }, [cats]);
-
   return (
     <div>
       <div className="bg-ink text-ink-foreground">
@@ -76,9 +118,13 @@ function ShopPage() {
         </div>
       </div>
       <div className="container mx-auto px-4 py-10 grid lg:grid-cols-[260px_1fr] gap-8">
+        {/* ── Sidebar ── */}
         <aside className="space-y-6">
           <form
-            onSubmit={(e) => { e.preventDefault(); navigate({ search: (s: Search) => ({ ...s, q: searchInput || undefined }) }); }}
+            onSubmit={(e) => {
+              e.preventDefault();
+              navigate({ search: (s: Search) => ({ ...s, q: searchInput || undefined }) });
+            }}
             className="relative"
           >
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -89,8 +135,10 @@ function ShopPage() {
               className="pl-9"
             />
           </form>
+
           <div>
             <h3 className="font-display text-lg mb-2">Categories</h3>
+            {/* All Products */}
             <Link
               to="/shop"
               search={{}}
@@ -98,17 +146,31 @@ function ShopPage() {
             >
               All Products
             </Link>
-            {groups.map(([group, list]) => (
-              <div key={group} className="mt-3">
-                <div className="text-[10px] uppercase tracking-widest text-muted-foreground">{group}</div>
-                {list!.map((c) => (
+
+            {/* Brand groups + children */}
+            {BRAND_GROUPS.map((group) => (
+              <div key={group.slug} className="mt-4">
+                {/* Main group link */}
+                <Link
+                  to="/shop"
+                  search={{ category: group.slug }}
+                  className={`block py-1 text-sm font-semibold uppercase tracking-wide hover:text-primary ${
+                    category === group.slug ? "text-primary" : "text-foreground"
+                  }`}
+                >
+                  {group.label}
+                </Link>
+                {/* Sub-categories */}
+                {group.children.map((child) => (
                   <Link
-                    key={c.slug}
+                    key={child.slug}
                     to="/shop"
-                    search={{ category: c.slug }}
-                    className={`block py-1.5 text-sm hover:text-primary ${category === c.slug ? "text-primary font-semibold" : ""}`}
+                    search={{ category: child.slug }}
+                    className={`block py-1 pl-3 text-sm hover:text-primary ${
+                      category === child.slug ? "text-primary font-semibold" : "text-muted-foreground"
+                    }`}
                   >
-                    {c.name}
+                    {child.label}
                   </Link>
                 ))}
               </div>
@@ -116,6 +178,7 @@ function ShopPage() {
           </div>
         </aside>
 
+        {/* ── Product grid ── */}
         <div>
           {isLoading ? (
             <div className="text-center py-20 text-muted-foreground">Loading…</div>

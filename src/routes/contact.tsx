@@ -15,7 +15,7 @@ export const Route = createFileRoute("/contact")({
         <a href={whatsappLink("Hello AFROGLOW")} target="_blank" rel="noopener" className="bg-ink text-ink-foreground rounded-lg p-6 hover:bg-primary hover:text-primary-foreground transition-colors">
           <MessageCircle className="h-7 w-7" />
           <div className="font-display text-xl mt-4">WhatsApp</div>
-          <div className="text-sm opacity-80 mt-1">+255 795 908 230</div>
+          <div className="text-sm opacity-80 mt-1">+255 697 858 009</div>
         </a>
         <div className="bg-card border border-border rounded-lg p-6">
           <Mail className="h-7 w-7 text-primary" />

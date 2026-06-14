@@ -4,11 +4,12 @@ import { useState } from "react";
 import { useCart } from "@/lib/cart";
 import { whatsappLink } from "@/lib/whatsapp";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/afrologo2.jpg";
 
 const SHOP_GROUPS = [
-  { label: "Beauty", category: "hair-care" },
-  { label: "Supplements", category: "whey-protein" },
-  { label: "Gym", category: "gym-gloves" },
+  { label: "Afro Glow", category: "afro-glow" },
+  { label: "Afro Gain", category: "afro-gain" },
+  { label: "Afro Wear", category: "afro-wear" },
 ] as const;
 
 export function SiteHeader() {
@@ -20,19 +21,20 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
       <div className="bg-ink text-ink-foreground text-xs">
         <div className="container mx-auto flex justify-between items-center px-4 py-1.5">
-          <span>Beauty • Supplements • Gym</span>
+          <span>Afro Glow • Afro Gain • Afro Wear</span>
           <a href={whatsappLink("Hello AFROGLOW, I have a question.")} target="_blank" rel="noopener" className="hidden sm:inline text-primary hover:underline">
-            +255 795 908 230
+            +255 697 858 009
           </a>
         </div>
       </div>
       <div className="container mx-auto flex items-center justify-between px-4 py-4">
         <Link to="/" className="flex items-center gap-2">
-          <div className="h-9 w-9 bg-primary text-primary-foreground grid place-items-center font-display text-lg rounded-sm">A</div>
-          <div className="leading-none">
-            <div className="font-display text-2xl tracking-wide">AFROGLOW</div>
-            <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Beauty • Fitness</div>
-          </div>
+          {/* 2. Update the img tag like this: */}
+          <img
+            src={logo}
+            alt="AFROGLOW Logo"
+            className="h-10 w-auto"
+          />
         </Link>
         <nav className="hidden lg:flex items-center gap-8 text-sm font-medium">
           <Link to="/" className="hover:text-primary transition-colors" activeOptions={{ exact: true }} activeProps={{ className: "text-primary" }}>Home</Link>

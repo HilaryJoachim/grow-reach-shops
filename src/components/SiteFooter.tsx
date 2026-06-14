@@ -36,7 +36,7 @@ export function SiteFooter() {
           <ul className="space-y-2 text-sm text-white/70">
             <li className="flex items-center gap-2">
               <MessageCircle className="h-4 w-4 text-primary" />
-              <a href={whatsappLink("Hello AFROGLOW")} target="_blank" rel="noopener" className="hover:text-primary">+255 795 908 230</a>
+              <a href={whatsappLink("Hello AFROGLOW")} target="_blank" rel="noopener" className="hover:text-primary">+255 697 858 009</a>
             </li>
             <li className="flex items-center gap-2"><Mail className="h-4 w-4 text-primary" /> orders@afroglow.com</li>
             <li className="flex items-center gap-2"><MapPin className="h-4 w-4 text-primary" /> Dar es Salaam, Tanzania</li>

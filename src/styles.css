@@ -34,7 +34,7 @@
   --font-sans: "Inter", system-ui, sans-serif;
   --shadow-glow: 0 20px 60px -20px color-mix(in oklab, var(--primary) 55%, transparent);
   --shadow-card: 0 1px 0 0 oklch(0 0 0 / 0.04), 0 8px 24px -12px oklch(0 0 0 / 0.18);
-  --gradient-fire: linear-gradient(135deg, oklch(0.72 0.20 50), oklch(0.62 0.24 35));
+  --gradient-fire: linear-gradient(135deg, oklch(0.72 0.2 50), oklch(0.62 0.24 35));
 }
 
 :root {
@@ -80,7 +80,7 @@
   --card-foreground: oklch(0.98 0 0);
   --popover: oklch(0.17 0.01 50);
   --popover-foreground: oklch(0.98 0 0);
-  --primary: oklch(0.72 0.20 48);
+  --primary: oklch(0.72 0.2 48);
   --primary-foreground: oklch(0.12 0.01 50);
   --ink: oklch(0.08 0.01 50);
   --ink-foreground: oklch(0.98 0 0);
@@ -94,18 +94,25 @@
   --destructive-foreground: oklch(0.98 0 0);
   --border: oklch(1 0 0 / 0.1);
   --input: oklch(1 0 0 / 0.15);
-  --ring: oklch(0.72 0.20 48);
+  --ring: oklch(0.72 0.2 48);
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html { font-family: var(--font-sans); }
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    font-family: var(--font-sans);
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, .font-display {
+  h1,
+  h2,
+  h3,
+  .font-display {
     font-family: var(--font-display);
     letter-spacing: 0.01em;
   }

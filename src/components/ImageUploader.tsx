@@ -29,7 +29,8 @@ export function ImageUploader({ value, onChange }: ImageUploaderProps) {
   // ── validation ─────────────────────────────────────────────────────────────
   function validate(file: File): string | null {
     if (!ACCEPTED.includes(file.type)) return "Only JPG, PNG or WEBP images are allowed.";
-    if (file.size > MAX_BYTES) return `File is too large (${(file.size / 1024 / 1024).toFixed(1)} MB). Max 5 MB.`;
+    if (file.size > MAX_BYTES)
+      return `File is too large (${(file.size / 1024 / 1024).toFixed(1)} MB). Max 5 MB.`;
     return null;
   }
 
@@ -63,7 +64,10 @@ export function ImageUploader({ value, onChange }: ImageUploaderProps) {
   // ── handle a selected file ─────────────────────────────────────────────────
   function handleFile(file: File) {
     const err = validate(file);
-    if (err) { toast.error(err); return; }
+    if (err) {
+      toast.error(err);
+      return;
+    }
 
     // Show a local preview immediately
     const reader = new FileReader();
@@ -75,15 +79,21 @@ export function ImageUploader({ value, onChange }: ImageUploaderProps) {
   }
 
   // ── drag events ────────────────────────────────────────────────────────────
-  const onDragOver = useCallback((e: React.DragEvent) => { e.preventDefault(); setDragging(true); }, []);
-  const onDragLeave = useCallback(() => setDragging(false), []);
-  const onDrop = useCallback((e: React.DragEvent) => {
+  const onDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
-    setDragging(false);
-    const file = e.dataTransfer.files[0];
-    if (file) handleFile(file);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value]);
+    setDragging(true);
+  }, []);
+  const onDragLeave = useCallback(() => setDragging(false), []);
+  const onDrop = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      setDragging(false);
+      const file = e.dataTransfer.files[0];
+      if (file) handleFile(file);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    },
+    [value],
+  );
 
   // ── remove image ───────────────────────────────────────────────────────────
   function handleRemove() {
@@ -113,7 +123,10 @@ export function ImageUploader({ value, onChange }: ImageUploaderProps) {
           type="file"
           accept={ACCEPTED.join(",")}
           className="hidden"
-          onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFile(f); }}
+          onChange={(e) => {
+            const f = e.target.files?.[0];
+            if (f) handleFile(f);
+          }}
         />
 
         {uploading && (

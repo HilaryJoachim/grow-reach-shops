@@ -24,19 +24,31 @@ function AdminLayout() {
   }
 
   if (isLoading) {
-    return <div className="container mx-auto px-4 py-16 text-center text-muted-foreground">Loading admin…</div>;
+    return (
+      <div className="container mx-auto px-4 py-16 text-center text-muted-foreground">
+        Loading admin…
+      </div>
+    );
   }
   if (error || !data?.isAdmin) {
     return (
       <div className="container mx-auto px-4 py-16 max-w-md text-center">
         <h1 className="font-display text-3xl">Not authorized</h1>
-        <p className="mt-2 text-sm text-muted-foreground">Your account doesn't have admin access. Contact the store owner.</p>
-        <Button onClick={signOut} className="mt-6">Sign out</Button>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Your account doesn't have admin access. Contact the store owner.
+        </p>
+        <Button onClick={signOut} className="mt-6">
+          Sign out
+        </Button>
       </div>
     );
   }
 
-  const tabs: Array<{ to: "/admin" | "/admin/products" | "/admin/categories" | "/admin/orders"; label: string; exact?: boolean }> = [
+  const tabs: Array<{
+    to: "/admin" | "/admin/products" | "/admin/categories" | "/admin/orders";
+    label: string;
+    exact?: boolean;
+  }> = [
     { to: "/admin", label: "Dashboard", exact: true },
     { to: "/admin/products", label: "Products" },
     { to: "/admin/categories", label: "Categories" },
@@ -50,13 +62,19 @@ function AdminLayout() {
           <div className="text-xs uppercase tracking-widest text-muted-foreground">AFROGLOW</div>
           <h1 className="font-display text-2xl">Admin Panel</h1>
         </div>
-        <Button variant="outline" size="sm" onClick={signOut}><LogOut className="h-4 w-4" /> Sign out</Button>
+        <Button variant="outline" size="sm" onClick={signOut}>
+          <LogOut className="h-4 w-4" /> Sign out
+        </Button>
       </div>
       <nav className="container mx-auto px-4 flex gap-1 overflow-x-auto">
         {tabs.map((t) => (
-          <Link key={t.to} to={t.to} activeOptions={{ exact: t.exact ?? false }}
+          <Link
+            key={t.to}
+            to={t.to}
+            activeOptions={{ exact: t.exact ?? false }}
             className="px-4 py-2 text-sm font-medium border-b-2 border-transparent hover:text-primary whitespace-nowrap"
-            activeProps={{ className: "border-primary text-primary" }}>
+            activeProps={{ className: "border-primary text-primary" }}
+          >
             {t.label}
           </Link>
         ))}

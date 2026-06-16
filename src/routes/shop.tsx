@@ -167,7 +167,9 @@ function ShopPage() {
                     to="/shop"
                     search={{ category: child.slug }}
                     className={`block py-1 pl-3 text-sm hover:text-primary ${
-                      category === child.slug ? "text-primary font-semibold" : "text-muted-foreground"
+                      category === child.slug
+                        ? "text-primary font-semibold"
+                        : "text-muted-foreground"
                     }`}
                   >
                     {child.label}
@@ -186,7 +188,9 @@ function ShopPage() {
             <div className="text-center py-20 text-muted-foreground">No products found.</div>
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {filtered.map((p) => <ProductCard key={p.id} p={p} />)}
+              {filtered.map((p) => (
+                <ProductCard key={p.id} p={p} />
+              ))}
             </div>
           )}
         </div>

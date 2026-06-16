@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
 import { claimAdminIfFirst } from "@/lib/admin.functions";
 import { Eye, EyeOff } from "lucide-react";
+import { getSupabaseConfigStatus } from "@/lib/debug.functions";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({ meta: [{ title: "Admin Login — AFROGLOW" }] }),
@@ -17,11 +18,32 @@ export const Route = createFileRoute("/auth")({
 function AuthPage() {
   const navigate = useNavigate();
   const claim = useServerFn(claimAdminIfFirst);
+  const getStatus = useServerFn(getSupabaseConfigStatus);
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const [debugData, setDebugData] = useState<Record<
+    string,
+    { defined: boolean; length: number; prefix: string }
+  > | null>(null);
+  const [debugLoading, setDebugLoading] = useState(false);
+  const [debugError, setDebugError] = useState<string | null>(null);
+
+  const isDebug =
+    typeof window !== "undefined" && new URLSearchParams(window.location.search).has("debug");
+
+  useEffect(() => {
+    if (isDebug) {
+      setDebugLoading(true);
+      getStatus()
+        .then(setDebugData)
+        .catch((err) => setDebugError(err instanceof Error ? err.message : String(err)))
+        .finally(() => setDebugLoading(false));
+    }
+  }, [isDebug, getStatus]);
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
@@ -126,10 +148,70 @@ function AuthPage() {
           setMode(mode === "signin" ? "signup" : "signin");
           setShowPassword(false);
         }}
-        className="mt-4 text-sm text-muted-foreground hover:text-primary"
+        className="mt-4 text-sm text-muted-foreground hover:text-primary block text-left w-full"
       >
         {mode === "signin" ? "No account yet? Create one" : "Have an account? Sign in"}
       </button>
+
+      {isDebug && (
+        <div className="mt-8 p-4 border border-destructive/30 rounded-lg bg-destructive/5 text-left text-xs font-mono">
+          <h2 className="font-bold text-sm text-destructive mb-2">Supabase Config Diagnostics</h2>
+          {debugLoading && <p>Loading config status...</p>}
+          {debugError && <p className="text-red-500">Error: {debugError}</p>}
+          {debugData && (
+            <div className="space-y-3">
+              <div>
+                <p className="font-semibold text-primary mb-1">
+                  Server-side environment variables:
+                </p>
+                <ul className="list-disc pl-4 space-y-1">
+                  <li>
+                    <strong>SUPABASE_URL:</strong>{" "}
+                    {debugData.SUPABASE_URL.defined
+                      ? `Defined (length: ${debugData.SUPABASE_URL.length}, prefix: "${debugData.SUPABASE_URL.prefix}")`
+                      : "Undefined ❌"}
+                  </li>
+                  <li>
+                    <strong>SUPABASE_PUBLISHABLE_KEY:</strong>{" "}
+                    {debugData.SUPABASE_PUBLISHABLE_KEY.defined
+                      ? `Defined (length: ${debugData.SUPABASE_PUBLISHABLE_KEY.length}, prefix: "${debugData.SUPABASE_PUBLISHABLE_KEY.prefix}")`
+                      : "Undefined ❌"}
+                  </li>
+                  <li>
+                    <strong>SUPABASE_SERVICE_ROLE_KEY:</strong>{" "}
+                    {debugData.SUPABASE_SERVICE_ROLE_KEY.defined
+                      ? `Defined (length: ${debugData.SUPABASE_SERVICE_ROLE_KEY.length}, prefix: "${debugData.SUPABASE_SERVICE_ROLE_KEY.prefix}")`
+                      : "Undefined ❌"}
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <p className="font-semibold text-primary mb-1">
+                  Build-time variables (client-side):
+                </p>
+                <ul className="list-disc pl-4 space-y-1">
+                  <li>
+                    <strong>VITE_SUPABASE_URL:</strong>{" "}
+                    {debugData.VITE_SUPABASE_URL.defined
+                      ? `Defined (length: ${debugData.VITE_SUPABASE_URL.length}, prefix: "${debugData.VITE_SUPABASE_URL.prefix}")`
+                      : "Undefined ❌"}
+                  </li>
+                  <li>
+                    <strong>VITE_SUPABASE_PUBLISHABLE_KEY:</strong>{" "}
+                    {debugData.VITE_SUPABASE_PUBLISHABLE_KEY.defined
+                      ? `Defined (length: ${debugData.VITE_SUPABASE_PUBLISHABLE_KEY.length}, prefix: "${debugData.VITE_SUPABASE_PUBLISHABLE_KEY.prefix}")`
+                      : "Undefined ❌"}
+                  </li>
+                </ul>
+              </div>
+              <p className="text-[10px] text-muted-foreground mt-2 leading-relaxed">
+                Tip: If build-time variables (VITE_*) are Undefined but server variables are
+                Defined, ensure they are configured in Vercel settings and redeploy.
+              </p>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

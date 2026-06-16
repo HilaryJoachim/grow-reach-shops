@@ -33,33 +33,42 @@ export function CartProvider({ children }: { children: ReactNode }) {
     try {
       const raw = localStorage.getItem(KEY);
       if (raw) setItems(JSON.parse(raw));
-    } catch {}
+    } catch (e) {
+      console.warn("Failed to load cart from localStorage:", e);
+    }
   }, []);
 
   useEffect(() => {
-    try { localStorage.setItem(KEY, JSON.stringify(items)); } catch {}
+    try {
+      localStorage.setItem(KEY, JSON.stringify(items));
+    } catch (e) {
+      console.warn("Failed to save cart to localStorage:", e);
+    }
   }, [items]);
 
-  const value: CartCtx = useMemo(() => ({
-    items,
-    add: (item, qty = 1) => setItems((prev) => {
-      const i = prev.findIndex((x) => x.id === item.id);
-      if (i >= 0) {
-        const next = [...prev];
-        next[i] = { ...next[i], qty: next[i].qty + qty };
-        return next;
-      }
-      return [...prev, { ...item, qty }];
+  const value: CartCtx = useMemo(
+    () => ({
+      items,
+      add: (item, qty = 1) =>
+        setItems((prev) => {
+          const i = prev.findIndex((x) => x.id === item.id);
+          if (i >= 0) {
+            const next = [...prev];
+            next[i] = { ...next[i], qty: next[i].qty + qty };
+            return next;
+          }
+          return [...prev, { ...item, qty }];
+        }),
+      setQty: (id, qty) =>
+        setItems((prev) => prev.map((x) => (x.id === id ? { ...x, qty: Math.max(1, qty) } : x))),
+      remove: (id) => setItems((prev) => prev.filter((x) => x.id !== id)),
+      clear: () => setItems([]),
+      count: items.reduce((s, i) => s + i.qty, 0),
+      subtotal: items.reduce((s, i) => s + lineTotal(i, i.qty), 0),
+      totalSavings: items.reduce((s, i) => s + savingsFor(i, i.qty), 0),
     }),
-    setQty: (id, qty) => setItems((prev) =>
-      prev.map((x) => (x.id === id ? { ...x, qty: Math.max(1, qty) } : x))
-    ),
-    remove: (id) => setItems((prev) => prev.filter((x) => x.id !== id)),
-    clear: () => setItems([]),
-    count: items.reduce((s, i) => s + i.qty, 0),
-    subtotal: items.reduce((s, i) => s + lineTotal(i, i.qty), 0),
-    totalSavings: items.reduce((s, i) => s + savingsFor(i, i.qty), 0),
-  }), [items]);
+    [items],
+  );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

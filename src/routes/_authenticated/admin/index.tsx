@@ -30,7 +30,9 @@ function AdminDashboard() {
         {stats.map((s) => (
           <div key={s.label} className="border border-border rounded-lg p-5 bg-card">
             <div className="flex items-center justify-between">
-              <div className="text-xs uppercase tracking-widest text-muted-foreground">{s.label}</div>
+              <div className="text-xs uppercase tracking-widest text-muted-foreground">
+                {s.label}
+              </div>
               <s.icon className="h-4 w-4 text-primary" />
             </div>
             <div className="mt-2 font-display text-3xl">{s.value}</div>
@@ -44,12 +46,16 @@ function AdminDashboard() {
             <div key={o.id} className="p-4 flex justify-between text-sm">
               <div>
                 <div className="font-medium">{o.customer_name}</div>
-                <div className="text-muted-foreground text-xs">{new Date(o.created_at).toLocaleString()}</div>
+                <div className="text-muted-foreground text-xs">
+                  {new Date(o.created_at).toLocaleString()}
+                </div>
               </div>
               <div className="font-semibold text-primary">{formatTsh(Number(o.total))}</div>
             </div>
           ))}
-          {(orders.data ?? []).length === 0 && <div className="p-6 text-center text-sm text-muted-foreground">No orders yet.</div>}
+          {(orders.data ?? []).length === 0 && (
+            <div className="p-6 text-center text-sm text-muted-foreground">No orders yet.</div>
+          )}
         </div>
       </div>
     </div>

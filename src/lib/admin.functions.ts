@@ -38,7 +38,11 @@ export const checkIsAdmin = createServerFn({ method: "GET" })
 const productSchema = z.object({
   id: z.string().uuid().optional(),
   name: z.string().min(1).max(200),
-  slug: z.string().min(1).max(200).regex(/^[a-z0-9-]+$/),
+  slug: z
+    .string()
+    .min(1)
+    .max(200)
+    .regex(/^[a-z0-9-]+$/),
   sku: z.string().max(100).optional().nullable(),
   category_slug: z.string().min(1).max(100),
   description: z.string().max(5000).default(""),
@@ -70,11 +74,18 @@ export const upsertProduct = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const { id, ...rest } = data;
     if (id) {
-      const { error } = await context.supabase.from("products").update({ ...rest, updated_at: new Date().toISOString() }).eq("id", id);
+      const { error } = await context.supabase
+        .from("products")
+        .update({ ...rest, updated_at: new Date().toISOString() })
+        .eq("id", id);
       if (error) throw new Error(error.message);
       return { id };
     }
-    const { data: ins, error } = await context.supabase.from("products").insert(rest).select("id").single();
+    const { data: ins, error } = await context.supabase
+      .from("products")
+      .insert(rest)
+      .select("id")
+      .single();
     if (error) throw new Error(error.message);
     return { id: ins.id };
   });
@@ -91,7 +102,11 @@ export const deleteProduct = createServerFn({ method: "POST" })
 const categorySchema = z.object({
   id: z.string().uuid().optional(),
   name: z.string().min(1).max(100),
-  slug: z.string().min(1).max(100).regex(/^[a-z0-9-]+$/),
+  slug: z
+    .string()
+    .min(1)
+    .max(100)
+    .regex(/^[a-z0-9-]+$/),
   parent: z.string().max(100).nullable().optional(),
   sort_order: z.number().int().default(0),
 });
@@ -99,7 +114,10 @@ const categorySchema = z.object({
 export const listCategoriesAdmin = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    const { data, error } = await context.supabase.from("categories").select("*").order("sort_order");
+    const { data, error } = await context.supabase
+      .from("categories")
+      .select("*")
+      .order("sort_order");
     if (error) throw new Error(error.message);
     return data ?? [];
   });
@@ -114,7 +132,11 @@ export const upsertCategory = createServerFn({ method: "POST" })
       if (error) throw new Error(error.message);
       return { id };
     }
-    const { data: ins, error } = await context.supabase.from("categories").insert(rest).select("id").single();
+    const { data: ins, error } = await context.supabase
+      .from("categories")
+      .insert(rest)
+      .select("id")
+      .single();
     if (error) throw new Error(error.message);
     return { id: ins.id };
   });
@@ -131,7 +153,10 @@ export const deleteCategory = createServerFn({ method: "POST" })
 export const listOrdersAdmin = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    const { data, error } = await context.supabase.from("orders").select("*").order("created_at", { ascending: false });
+    const { data, error } = await context.supabase
+      .from("orders")
+      .select("*")
+      .order("created_at", { ascending: false });
     if (error) throw new Error(error.message);
     return data ?? [];
   });

@@ -19,15 +19,19 @@ import { Button } from "@/components/ui/button";
 
 // ─── Hero slide images ────────────────────────────────────────────────────────
 // Swap any of these imports to change the image for that slide.
-import heroBeauty from "@/assets/bnnn3.png";       // Slide 1 — Afro Glow
+import heroBeauty from "@/assets/bnnn3.png"; // Slide 1 — Afro Glow
 import heroSupplements from "@/assets/bnnn1.png"; // Slide 2 — Afro Gain
-import heroGym from "@/assets/bnnn2.png";               // Slide 3 — Afro Wear
+import heroGym from "@/assets/bnnn2.png"; // Slide 3 — Afro Wear
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "AFROGLOW — Premium Beauty, Supplements & Gym Gear" },
-      { name: "description", content: "Shop hair growth oils, whey protein, creatine, pre-workout, gym accessories and more. Retail & wholesale pricing with WhatsApp ordering." },
+      {
+        name: "description",
+        content:
+          "Shop hair growth oils, whey protein, creatine, pre-workout, gym accessories and more. Retail & wholesale pricing with WhatsApp ordering.",
+      },
     ],
   }),
   component: HomePage,
@@ -56,7 +60,7 @@ const HERO_SLIDES = [
     body: "Premium skincare, body care & hair care products — handpicked for your natural glow. Retail & wholesale pricing.",
     cta: "Shop Afro Glow",
     ctaSearch: { category: "afro-glow" },
-    image: heroBeauty,           // ← Slide 1 image (swap heroBeauty to any imported asset)
+    image: heroBeauty, // ← Slide 1 image (swap heroBeauty to any imported asset)
     imageAlt: "Glowing skin with premium AFROGLOW beauty products",
     imageBadge: "Beauty & Skin",
   },
@@ -68,7 +72,7 @@ const HERO_SLIDES = [
     body: "Whey protein, creatine, pre-workout & more — science-backed supplements for every training goal.",
     cta: "Shop Afro Gain",
     ctaSearch: { category: "afro-gain" },
-    image: heroSupplements,      // ← Slide 2 image (swap heroSupplements to any imported asset)
+    image: heroSupplements, // ← Slide 2 image (swap heroSupplements to any imported asset)
     imageAlt: "Athlete fuelling performance with AFROGLOW supplements",
     imageBadge: "Sports Nutrition",
   },
@@ -80,7 +84,7 @@ const HERO_SLIDES = [
     body: "Men's & women's activewear and gym accessories — built for performance, designed to stand out.",
     cta: "Shop Afro Wear",
     ctaSearch: { category: "afro-wear" },
-    image: heroGym,              // ← Slide 3 image (swap heroGym to any imported asset)
+    image: heroGym, // ← Slide 3 image (swap heroGym to any imported asset)
     imageAlt: "Athlete wearing AFROGLOW gym apparel",
     imageBadge: "Gym & Wear",
   },
@@ -101,7 +105,9 @@ function HeroCarousel() {
     if (!emblaApi) return;
     const onSelect = () => setSelected(emblaApi.selectedScrollSnap());
     emblaApi.on("select", onSelect);
-    return () => { emblaApi.off("select", onSelect); };
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
   }, [emblaApi]);
 
   // Auto-play every 5 s, paused on hover
@@ -124,11 +130,7 @@ function HeroCarousel() {
           {HERO_SLIDES.map((slide, idx) => {
             const TagIcon = slide.tagIcon;
             return (
-              <div
-                key={idx}
-                className="flex-[0_0_100%] min-w-0"
-                aria-hidden={selected !== idx}
-              >
+              <div key={idx} className="flex-[0_0_100%] min-w-0" aria-hidden={selected !== idx}>
                 <div className="container mx-auto px-4 py-16 md:py-20 grid lg:grid-cols-2 gap-12 items-center">
                   {/* ── Text column ── */}
                   <div className="relative z-10 order-2 lg:order-1">
@@ -172,7 +174,8 @@ function HeroCarousel() {
 
                     {/* Slide counter */}
                     <p className="mt-8 text-xs text-white/30 uppercase tracking-widest font-semibold">
-                      {String(idx + 1).padStart(2, "0")} / {String(HERO_SLIDES.length).padStart(2, "0")}
+                      {String(idx + 1).padStart(2, "0")} /{" "}
+                      {String(HERO_SLIDES.length).padStart(2, "0")}
                     </p>
                   </div>
 
@@ -229,10 +232,9 @@ function HeroCarousel() {
             key={i}
             onClick={() => scrollTo(i)}
             aria-label={`Go to slide ${i + 1}`}
-            className={`transition-all duration-300 rounded-full ${i === selected
-              ? "w-6 h-2 bg-primary"
-              : "w-2 h-2 bg-white/30 hover:bg-white/60"
-              }`}
+            className={`transition-all duration-300 rounded-full ${
+              i === selected ? "w-6 h-2 bg-primary" : "w-2 h-2 bg-white/30 hover:bg-white/60"
+            }`}
           />
         ))}
       </div>
@@ -296,7 +298,9 @@ function WhyCarousel() {
     if (!emblaApi) return;
     const onSelect = () => setSelected(emblaApi.selectedScrollSnap());
     emblaApi.on("select", onSelect);
-    return () => { emblaApi.off("select", onSelect); };
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
   }, [emblaApi]);
 
   return (
@@ -327,7 +331,6 @@ function WhyCarousel() {
             {WHY_SLIDES.map((slide, idx) => (
               <div key={idx} className="flex-[0_0_100%] min-w-0">
                 <div className="container mx-auto px-4 py-16 grid md:grid-cols-2 gap-10 items-center">
-
                   {/* Text column */}
                   <div>
                     <p className="text-xs uppercase tracking-widest text-primary font-semibold">
@@ -336,7 +339,9 @@ function WhyCarousel() {
                     <h2 className="font-display text-4xl md:text-5xl mt-2">{slide.title}</h2>
                     <p className="mt-4 text-white/75 leading-relaxed">{slide.body}</p>
                     <Button asChild size="lg" className="mt-6">
-                      <Link to="/shop" search={slide.ctaSearch as never}>{slide.cta}</Link>
+                      <Link to="/shop" search={slide.ctaSearch as never}>
+                        {slide.cta}
+                      </Link>
                     </Button>
                   </div>
 
@@ -382,9 +387,7 @@ function WhyCarousel() {
             onClick={() => scrollTo(i)}
             aria-label={`Go to slide ${i + 1}`}
             className={`transition-all duration-300 rounded-full ${
-              i === selected
-                ? "w-6 h-2 bg-primary"
-                : "w-2 h-2 bg-white/30 hover:bg-white/60"
+              i === selected ? "w-6 h-2 bg-primary" : "w-2 h-2 bg-white/30 hover:bg-white/60"
             }`}
           />
         ))}
@@ -412,15 +415,19 @@ function HomePage() {
       {/* HERO CAROUSEL */}
       <HeroCarousel />
 
-
       {/* CATEGORIES */}
       <section className="container mx-auto px-4 py-16">
         <div className="flex items-end justify-between mb-8">
           <div>
-            <p className="text-xs uppercase tracking-widest text-primary font-semibold">Shop by category</p>
+            <p className="text-xs uppercase tracking-widest text-primary font-semibold">
+              Shop by category
+            </p>
             <h2 className="font-display text-3xl md:text-4xl">Trending collection</h2>
           </div>
-          <Link to="/shop" className="hidden md:inline-flex items-center text-sm font-semibold text-primary hover:underline">
+          <Link
+            to="/shop"
+            className="hidden md:inline-flex items-center text-sm font-semibold text-primary hover:underline"
+          >
             View all <ArrowRight className="h-4 w-4 ml-1" />
           </Link>
         </div>
@@ -434,7 +441,9 @@ function HomePage() {
             >
               <c.icon className="h-7 w-7 text-primary" />
               <div className="mt-6">
-                <div className="text-[10px] uppercase tracking-widest text-muted-foreground">{c.group}</div>
+                <div className="text-[10px] uppercase tracking-widest text-muted-foreground">
+                  {c.group}
+                </div>
                 <div className="font-display text-xl mt-0.5">{c.name}</div>
               </div>
               <ArrowRight className="absolute top-5 right-5 h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
@@ -447,12 +456,16 @@ function HomePage() {
       <section className="container mx-auto px-4 pb-16">
         <div className="flex items-end justify-between mb-8">
           <div>
-            <p className="text-xs uppercase tracking-widest text-primary font-semibold">Best sellers</p>
+            <p className="text-xs uppercase tracking-widest text-primary font-semibold">
+              Best sellers
+            </p>
             <h2 className="font-display text-3xl md:text-4xl">Featured Products</h2>
           </div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {(featured ?? []).map((p) => <ProductCard key={p.id} p={p} />)}
+          {(featured ?? []).map((p) => (
+            <ProductCard key={p.id} p={p} />
+          ))}
         </div>
       </section>
 
@@ -463,10 +476,26 @@ function HomePage() {
       <section className="container mx-auto px-4 py-16">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
-            { i: ShieldCheck, t: "Premium Quality", d: "Authentic products, sourced from trusted brands." },
-            { i: Truck, t: "Wholesale Discounts", d: "Better pricing once you hit MOQ. Auto-applied at cart." },
-            { i: MessageCircle, t: "Direct WhatsApp", d: "Order in seconds — no checkout friction." },
-            { i: Flame, t: "Trusted Supplier", d: "Serving salons, gyms and resellers across Tanzania." },
+            {
+              i: ShieldCheck,
+              t: "Premium Quality",
+              d: "Authentic products, sourced from trusted brands.",
+            },
+            {
+              i: Truck,
+              t: "Wholesale Discounts",
+              d: "Better pricing once you hit MOQ. Auto-applied at cart.",
+            },
+            {
+              i: MessageCircle,
+              t: "Direct WhatsApp",
+              d: "Order in seconds — no checkout friction.",
+            },
+            {
+              i: Flame,
+              t: "Trusted Supplier",
+              d: "Serving salons, gyms and resellers across Tanzania.",
+            },
           ].map((x) => (
             <div key={x.t} className="bg-card border border-border rounded-lg p-6">
               <x.i className="h-7 w-7 text-primary" />
@@ -480,13 +509,29 @@ function HomePage() {
       {/* TESTIMONIALS */}
       <section className="bg-secondary py-16">
         <div className="container mx-auto px-4">
-          <p className="text-xs uppercase tracking-widest text-primary font-semibold text-center">Loved by</p>
-          <h2 className="font-display text-3xl md:text-4xl text-center">Salons, Gyms & Resellers</h2>
+          <p className="text-xs uppercase tracking-widest text-primary font-semibold text-center">
+            Loved by
+          </p>
+          <h2 className="font-display text-3xl md:text-4xl text-center">
+            Salons, Gyms & Resellers
+          </h2>
           <div className="mt-10 grid md:grid-cols-3 gap-6">
             {[
-              { n: "Amina K.", r: "Salon Owner", q: "The hair oil sells out every month. Wholesale pricing makes margin easy." },
-              { n: "Joseph M.", r: "Gym Owner", q: "Reliable supplements at the best prices. WhatsApp orders ship same day." },
-              { n: "Neema R.", r: "Reseller", q: "Quality is real and the team responds fast. My customers come back." },
+              {
+                n: "Amina K.",
+                r: "Salon Owner",
+                q: "The hair oil sells out every month. Wholesale pricing makes margin easy.",
+              },
+              {
+                n: "Joseph M.",
+                r: "Gym Owner",
+                q: "Reliable supplements at the best prices. WhatsApp orders ship same day.",
+              },
+              {
+                n: "Neema R.",
+                r: "Reseller",
+                q: "Quality is real and the team responds fast. My customers come back.",
+              },
             ].map((t) => (
               <div key={t.n} className="bg-card border border-border rounded-lg p-6">
                 <div className="text-primary text-lg">★★★★★</div>

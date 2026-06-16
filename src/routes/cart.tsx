@@ -38,10 +38,12 @@ function CartPage() {
     }
     setSubmitting(true);
 
-    const lines = items.map((i, idx) => {
-      const u = unitPriceFor(i, i.qty);
-      return `${idx + 1}. ${i.name} — Qty ${i.qty} × ${formatTsh(u)} = ${formatTsh(u * i.qty)}`;
-    }).join("\n");
+    const lines = items
+      .map((i, idx) => {
+        const u = unitPriceFor(i, i.qty);
+        return `${idx + 1}. ${i.name} — Qty ${i.qty} × ${formatTsh(u)} = ${formatTsh(u * i.qty)}`;
+      })
+      .join("\n");
 
     const msg = `Hello AFROGLOW,
 
@@ -64,7 +66,9 @@ Please contact me to confirm.`;
         city: form.city || null,
         business_name: form.business || null,
         items: items.map((i) => ({
-          id: i.id, name: i.name, qty: i.qty,
+          id: i.id,
+          name: i.name,
+          qty: i.qty,
           unit_price: unitPriceFor(i, i.qty),
         })),
         total: subtotal,
@@ -105,21 +109,57 @@ Please contact me to confirm.`;
             return (
               <div key={i.id} className="flex gap-4 bg-card border border-border rounded-lg p-4">
                 <div className="h-24 w-24 shrink-0 bg-muted rounded overflow-hidden">
-                  {i.image_url ? <img src={i.image_url} alt={i.name} className="h-full w-full object-cover" /> : <div className="h-full w-full grid place-items-center font-display text-2xl text-primary/40">A</div>}
+                  {i.image_url ? (
+                    <img src={i.image_url} alt={i.name} className="h-full w-full object-cover" />
+                  ) : (
+                    <div className="h-full w-full grid place-items-center font-display text-2xl text-primary/40">
+                      A
+                    </div>
+                  )}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <Link to="/products/$slug" params={{ slug: i.slug }} className="font-semibold hover:text-primary line-clamp-2">{i.name}</Link>
+                  <Link
+                    to="/products/$slug"
+                    params={{ slug: i.slug }}
+                    className="font-semibold hover:text-primary line-clamp-2"
+                  >
+                    {i.name}
+                  </Link>
                   <div className="text-xs text-muted-foreground mt-0.5">
-                    {isWh ? <span className="text-primary">Wholesale {formatTsh(u)}</span> : `${formatTsh(u)} (MOQ ${i.moq}+ for wholesale)`}
+                    {isWh ? (
+                      <span className="text-primary">Wholesale {formatTsh(u)}</span>
+                    ) : (
+                      `${formatTsh(u)} (MOQ ${i.moq}+ for wholesale)`
+                    )}
                   </div>
                   <div className="mt-3 flex items-center justify-between flex-wrap gap-2">
                     <div className="inline-flex items-center border border-border rounded-md">
-                      <button className="p-1.5 hover:bg-muted" onClick={() => setQty(i.id, i.qty - 1)}><Minus className="h-3.5 w-3.5" /></button>
-                      <input type="number" value={i.qty} onChange={(e) => setQty(i.id, Math.max(1, Number(e.target.value) || 1))} className="w-12 text-center bg-transparent border-0 focus:outline-none text-sm" />
-                      <button className="p-1.5 hover:bg-muted" onClick={() => setQty(i.id, i.qty + 1)}><Plus className="h-3.5 w-3.5" /></button>
+                      <button
+                        className="p-1.5 hover:bg-muted"
+                        onClick={() => setQty(i.id, i.qty - 1)}
+                      >
+                        <Minus className="h-3.5 w-3.5" />
+                      </button>
+                      <input
+                        type="number"
+                        value={i.qty}
+                        onChange={(e) => setQty(i.id, Math.max(1, Number(e.target.value) || 1))}
+                        className="w-12 text-center bg-transparent border-0 focus:outline-none text-sm"
+                      />
+                      <button
+                        className="p-1.5 hover:bg-muted"
+                        onClick={() => setQty(i.id, i.qty + 1)}
+                      >
+                        <Plus className="h-3.5 w-3.5" />
+                      </button>
                     </div>
                     <div className="font-display text-lg text-primary">{formatTsh(u * i.qty)}</div>
-                    <button className="p-2 text-muted-foreground hover:text-destructive" onClick={() => remove(i.id)}><Trash2 className="h-4 w-4" /></button>
+                    <button
+                      className="p-2 text-muted-foreground hover:text-destructive"
+                      onClick={() => remove(i.id)}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
                   </div>
                 </div>
               </div>
@@ -130,34 +170,69 @@ Please contact me to confirm.`;
         <aside className="bg-card border border-border rounded-lg p-6 h-fit lg:sticky lg:top-24">
           <h2 className="font-display text-2xl">Order Summary</h2>
           <div className="mt-4 space-y-2 text-sm">
-            <div className="flex justify-between"><span className="text-muted-foreground">Subtotal</span><span className="font-semibold">{formatTsh(subtotal)}</span></div>
-            {totalSavings > 0 && <div className="flex justify-between text-primary"><span>Wholesale savings</span><span className="font-semibold">−{formatTsh(totalSavings)}</span></div>}
-            <div className="border-t border-border pt-2 flex justify-between"><span className="font-semibold">Total</span><span className="font-display text-2xl text-primary">{formatTsh(subtotal)}</span></div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Subtotal</span>
+              <span className="font-semibold">{formatTsh(subtotal)}</span>
+            </div>
+            {totalSavings > 0 && (
+              <div className="flex justify-between text-primary">
+                <span>Wholesale savings</span>
+                <span className="font-semibold">−{formatTsh(totalSavings)}</span>
+              </div>
+            )}
+            <div className="border-t border-border pt-2 flex justify-between">
+              <span className="font-semibold">Total</span>
+              <span className="font-display text-2xl text-primary">{formatTsh(subtotal)}</span>
+            </div>
           </div>
 
           <div className="mt-6 space-y-3">
             <div>
               <Label htmlFor="name">Full Name *</Label>
-              <Input id="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+              <Input
+                id="name"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+              />
             </div>
             <div>
               <Label htmlFor="phone">Phone *</Label>
-              <Input id="phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+255..." />
+              <Input
+                id="phone"
+                value={form.phone}
+                onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                placeholder="+255..."
+              />
             </div>
             <div>
               <Label htmlFor="city">City</Label>
-              <Input id="city" value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} />
+              <Input
+                id="city"
+                value={form.city}
+                onChange={(e) => setForm({ ...form, city: e.target.value })}
+              />
             </div>
             <div>
               <Label htmlFor="business">Business Name (optional)</Label>
-              <Input id="business" value={form.business} onChange={(e) => setForm({ ...form, business: e.target.value })} />
+              <Input
+                id="business"
+                value={form.business}
+                onChange={(e) => setForm({ ...form, business: e.target.value })}
+              />
             </div>
           </div>
 
-          <Button onClick={handleSubmit} disabled={submitting} size="lg" className="w-full mt-5 bg-ink text-ink-foreground hover:bg-primary">
+          <Button
+            onClick={handleSubmit}
+            disabled={submitting}
+            size="lg"
+            className="w-full mt-5 bg-ink text-ink-foreground hover:bg-primary"
+          >
             <MessageCircle className="h-4 w-4 mr-1" /> Send Order to WhatsApp
           </Button>
-          <p className="text-[11px] text-muted-foreground mt-2 text-center">No online payment — confirm with seller on WhatsApp.</p>
+          <p className="text-[11px] text-muted-foreground mt-2 text-center">
+            No online payment — confirm with seller on WhatsApp.
+          </p>
         </aside>
       </div>
     </div>

@@ -181,7 +181,7 @@ function HeroCarousel() {
 
                   {/* ── Image column ── */}
                   <div className="relative order-1 lg:order-2">
-                    <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl aspect-[4/3] md:aspect-[3/2] lg:aspect-[4/3]">
+                    <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_30px_-5px_var(--color-primary)] md:shadow-2xl aspect-[4/3] md:aspect-[3/2] lg:aspect-[4/3]">
                       <img
                         src={slide.image}
                         alt={slide.imageAlt}

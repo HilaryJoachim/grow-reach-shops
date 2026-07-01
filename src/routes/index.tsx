@@ -38,14 +38,14 @@ export const Route = createFileRoute("/")({
 });
 
 const CATEGORY_TILES = [
-  { slug: "body-care", name: "Body Lotion", group: "Afro Glow", icon: Sparkles, image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=600&auto=format&fit=crop" },
-  { slug: "skin-care", name: "Collagens", group: "Afro Glow", icon: Sparkles, image: "https://images.unsplash.com/photo-1611077544760-7a0fc6230f87?q=80&w=600&auto=format&fit=crop" },
-  { slug: "skin-care", name: "Skin Care", group: "Afro Glow", icon: Sparkles, image: "https://images.unsplash.com/photo-1617897903246-719242758050?q=80&w=600&auto=format&fit=crop" },
-  { slug: "creatine", name: "Creatine", group: "Afro Gain", icon: Flame, image: "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?q=80&w=600&auto=format&fit=crop" },
-  { slug: "whey-protein", name: "Whey Protein", group: "Afro Gain", icon: Flame, image: "https://images.unsplash.com/photo-1579722821273-0f1387d853e3?q=80&w=600&auto=format&fit=crop" },
-  { slug: "pre-workout", name: "Pre Workout", group: "Afro Gain", icon: Flame, image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=600&auto=format&fit=crop" },
-  { slug: "women-wear", name: "Women Wear", group: "Afro Wear", icon: Dumbbell, image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=600&auto=format&fit=crop" },
-  { slug: "gym-accessories", name: "Gym Support", group: "Afro Wear", icon: Dumbbell, image: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=600&auto=format&fit=crop" },
+  { slug: "body-care", name: "Body Lotion", group: "Afro Glow", icon: Sparkles, image: heroBeauty },
+  { slug: "skin-care", name: "Collagens", group: "Afro Glow", icon: Sparkles, image: heroBeauty },
+  { slug: "skin-care", name: "Skin Care", group: "Afro Glow", icon: Sparkles, image: heroBeauty },
+  { slug: "creatine", name: "Creatine", group: "Afro Gain", icon: Flame, image: heroSupplements },
+  { slug: "whey-protein", name: "Whey Protein", group: "Afro Gain", icon: Flame, image: heroSupplements },
+  { slug: "pre-workout", name: "Pre Workout", group: "Afro Gain", icon: Flame, image: heroSupplements },
+  { slug: "women-wear", name: "Women Wear", group: "Afro Wear", icon: Dumbbell, image: heroGym },
+  { slug: "gym-accessories", name: "Gym Support", group: "Afro Wear", icon: Dumbbell, image: heroGym },
 ];
 
 // ─── Hero slide data ──────────────────────────────────────────────────────────

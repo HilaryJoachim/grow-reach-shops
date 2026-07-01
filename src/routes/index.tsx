@@ -38,14 +38,14 @@ export const Route = createFileRoute("/")({
 });
 
 const CATEGORY_TILES = [
-  { slug: "body-care", name: "Body Lotion", group: "Afro Glow", icon: Sparkles },
-  { slug: "skin-care", name: "Collagens", group: "Afro Glow", icon: Sparkles },
-  { slug: "skin-care", name: "Skin Care", group: "Afro Glow", icon: Sparkles },
-  { slug: "creatine", name: "Creatine", group: "Afro Gain", icon: Flame },
-  { slug: "whey-protein", name: "Whey Protein", group: "Afro Gain", icon: Flame },
-  { slug: "pre-workout", name: "Pre Workout", group: "Afro Gain", icon: Flame },
-  { slug: "women-wear", name: "Women Wear", group: "Afro Wear", icon: Dumbbell },
-  { slug: "gym-accessories", name: "Gym Support", group: "Afro Wear", icon: Dumbbell },
+  { slug: "body-care", name: "Body Lotion", group: "Afro Glow", icon: Sparkles, image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=600&auto=format&fit=crop" },
+  { slug: "skin-care", name: "Collagens", group: "Afro Glow", icon: Sparkles, image: "https://images.unsplash.com/photo-1611077544760-7a0fc6230f87?q=80&w=600&auto=format&fit=crop" },
+  { slug: "skin-care", name: "Skin Care", group: "Afro Glow", icon: Sparkles, image: "https://images.unsplash.com/photo-1617897903246-719242758050?q=80&w=600&auto=format&fit=crop" },
+  { slug: "creatine", name: "Creatine", group: "Afro Gain", icon: Flame, image: "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?q=80&w=600&auto=format&fit=crop" },
+  { slug: "whey-protein", name: "Whey Protein", group: "Afro Gain", icon: Flame, image: "https://images.unsplash.com/photo-1579722821273-0f1387d853e3?q=80&w=600&auto=format&fit=crop" },
+  { slug: "pre-workout", name: "Pre Workout", group: "Afro Gain", icon: Flame, image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=600&auto=format&fit=crop" },
+  { slug: "women-wear", name: "Women Wear", group: "Afro Wear", icon: Dumbbell, image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=600&auto=format&fit=crop" },
+  { slug: "gym-accessories", name: "Gym Support", group: "Afro Wear", icon: Dumbbell, image: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=600&auto=format&fit=crop" },
 ];
 
 // ─── Hero slide data ──────────────────────────────────────────────────────────
@@ -437,16 +437,26 @@ function HomePage() {
               key={c.slug}
               to="/shop"
               search={{ category: c.slug } as never}
-              className="group relative bg-card border border-border p-5 rounded-lg hover:border-primary hover:shadow-card transition-all"
+              className="group relative h-40 md:h-48 rounded-lg overflow-hidden border border-border hover:border-primary transition-all shadow-sm hover:shadow-card flex flex-col justify-end p-5"
             >
-              <c.icon className="h-7 w-7 text-primary" />
-              <div className="mt-6">
-                <div className="text-[10px] uppercase tracking-widest text-muted-foreground">
+              <div className="absolute inset-0 z-0">
+                <img
+                  src={c.image}
+                  alt={c.name}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/40 to-ink/20 group-hover:bg-ink/60 transition-colors duration-500" />
+              </div>
+              
+              <div className="relative z-10">
+                <c.icon className="absolute top-0 right-0 h-8 w-8 text-white/20 group-hover:text-primary -translate-y-8 group-hover:-translate-y-4 transition-all duration-500" />
+                <div className="text-[10px] uppercase tracking-widest text-primary/80 group-hover:text-primary transition-colors font-bold mb-1">
                   {c.group}
                 </div>
-                <div className="font-display text-xl mt-0.5">{c.name}</div>
+                <div className="font-display text-xl text-white md:text-2xl">{c.name}</div>
               </div>
-              <ArrowRight className="absolute top-5 right-5 h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+              
+              <ArrowRight className="absolute bottom-5 right-5 h-5 w-5 text-white/40 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300 z-10" />
             </Link>
           ))}
         </div>

@@ -26,7 +26,7 @@ import heroGym from "@/assets/bnnn2.png"; // Slide 3 — Afro Gear
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AFROGLOW — Premium Beauty, Supplements & Gym Gear" },
+      { title: "AFROGLOW - Premium Beauty, Supplements & Gym Gear" },
       {
         name: "description",
         content:

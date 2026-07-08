@@ -60,7 +60,7 @@ export const Route = createFileRoute("/shop")({
   }),
   head: () => ({
     meta: [
-      { title: "Shop — AFROGLOW" },
+      { title: "Shop - AFROGLOW" },
       {
         name: "description",
         content:

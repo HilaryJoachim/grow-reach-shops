@@ -11,7 +11,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { getSupabaseConfigStatus } from "@/lib/debug.functions";
 
 export const Route = createFileRoute("/auth")({
-  head: () => ({ meta: [{ title: "Admin Login — AFROGLOW" }] }),
+  head: () => ({ meta: [{ title: "Admin Login - AFROGLOW" }] }),
   component: AuthPage,
 });
 

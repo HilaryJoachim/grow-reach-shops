@@ -13,7 +13,7 @@ import { z } from "zod";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/cart")({
-  head: () => ({ meta: [{ title: "Your Cart — AFROGLOW" }] }),
+  head: () => ({ meta: [{ title: "Your Cart - AFROGLOW" }] }),
   component: CartPage,
 });
 

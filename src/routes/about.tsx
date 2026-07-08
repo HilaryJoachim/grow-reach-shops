@@ -6,7 +6,7 @@ import { whatsappLink } from "@/lib/whatsapp";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — AFROGLOW" },
+      { title: "About - AFROGLOW" },
       {
         name: "description",
         content:

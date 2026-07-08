@@ -47,10 +47,10 @@ export function SiteFooter() {
             <li>
               <Link
                 to="/shop"
-                search={{ category: "gym-gloves" } as never}
+                search={{ category: "afro-gear" } as never}
                 className="hover:text-primary"
               >
-                Gym
+                Gear
               </Link>
             </li>
           </ul>
@@ -96,7 +96,7 @@ export function SiteFooter() {
       <div className="border-t border-white/10">
         <div className="container mx-auto px-4 py-5 text-xs text-white/50 flex flex-wrap justify-between gap-2">
           <span>© {new Date().getFullYear()} AFROGLOW. All rights reserved.</span>
-          <span>Beauty • Supplements • Gym</span>
+          <span>Beauty • Supplements • Gear</span>
         </div>
       </div>
     </footer>

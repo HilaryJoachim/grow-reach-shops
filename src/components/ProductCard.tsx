@@ -58,7 +58,7 @@ export function ProductCard({ p }: { p: ProductCardData }) {
           <span className="font-semibold text-foreground">{formatTsh(p.wholesale_price)}</span> @{" "}
           {p.moq}+
         </div>
-        <div className="mt-3 flex gap-2">
+        <div className="mt-3 flex flex-col 2xl:flex-row gap-2">
           <Button asChild variant="outline" size="sm" className="flex-1">
             <Link to="/products/$slug" params={{ slug: p.slug }}>
               Details

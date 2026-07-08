@@ -135,7 +135,7 @@ export function SiteHeader() {
               onClick={() => setOpen(false)}
               className="py-2.5 border-b border-border"
             >
-              Shop — All
+              All Products
             </Link>
             {SHOP_GROUPS.map((g) => (
               <Link

@@ -9,7 +9,7 @@ import logo from "@/assets/afrologo2.jpg";
 const SHOP_GROUPS = [
   { label: "Afro Glow", category: "afro-glow" },
   { label: "Afro Gain", category: "afro-gain" },
-  { label: "Afro Wear", category: "afro-wear" },
+  { label: "Afro Gear", category: "afro-gear" },
 ] as const;
 
 export function SiteHeader() {
@@ -21,14 +21,14 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
       <div className="bg-ink text-ink-foreground text-xs">
         <div className="container mx-auto flex justify-between items-center px-4 py-1.5">
-          <span>Afro Glow • Afro Gain • Afro Wear</span>
+          <span>Afro Glow • Afro Gain • Afro Gear</span>
           <a
             href={whatsappLink("Hello AFROGLOW, I have a question.")}
             target="_blank"
             rel="noopener"
             className="hidden sm:inline text-primary hover:underline"
           >
-            +255 697 858 009
+            +91 690 929 8493
           </a>
         </div>
       </div>

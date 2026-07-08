@@ -21,7 +21,7 @@ import { Button } from "@/components/ui/button";
 // Swap any of these imports to change the image for that slide.
 import heroBeauty from "@/assets/bnnn3.png"; // Slide 1 — Afro Glow
 import heroSupplements from "@/assets/bnnn1.png"; // Slide 2 — Afro Gain
-import heroGym from "@/assets/bnnn2.png"; // Slide 3 — Afro Wear
+import heroGym from "@/assets/bnnn2.png"; // Slide 3 — Afro Gear
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -44,8 +44,8 @@ const CATEGORY_TILES = [
   { slug: "creatine", name: "Creatine", group: "Afro Gain", icon: Flame, image: "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?q=80&w=600&auto=format&fit=crop" },
   { slug: "whey-protein", name: "Whey Protein", group: "Afro Gain", icon: Flame, image: "https://images.unsplash.com/photo-1579722820308-d74e571900a9?q=80&w=600&auto=format&fit=crop" },
   { slug: "pre-workout", name: "Pre Workout", group: "Afro Gain", icon: Flame, image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=600&auto=format&fit=crop" },
-  { slug: "women-wear", name: "Women Wear", group: "Afro Wear", icon: Dumbbell, image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=600&auto=format&fit=crop" },
-  { slug: "gym-accessories", name: "Gym Support", group: "Afro Wear", icon: Dumbbell, image: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=600&auto=format&fit=crop" },
+  { slug: "women-wear", name: "Women Wear", group: "Afro Gear", icon: Dumbbell, image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=600&auto=format&fit=crop" },
+  { slug: "gym-accessories", name: "Gym Support", group: "Afro Gear", icon: Dumbbell, image: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=600&auto=format&fit=crop" },
 ];
 
 // ─── Hero slide data ──────────────────────────────────────────────────────────
@@ -77,12 +77,12 @@ const HERO_SLIDES = [
     imageBadge: "Sports Nutrition",
   },
   {
-    tag: "Afro Wear",
+    tag: "Afro Gear",
     tagIcon: Dumbbell,
     headline: ["Gear Up,", "Train Hard,", "Look the Part"],
     headlineAccent: [false, false, true],
     body: "Men's & women's activewear and gym accessories — built for performance, designed to stand out.",
-    cta: "Shop Afro Wear",
+    cta: "Shop Afro Gear",
     ctaSearch: { category: "afro-wear" },
     image: heroGym, // ← Slide 3 image (swap heroGym to any imported asset)
     imageAlt: "Athlete wearing AFROGLOW gym apparel",

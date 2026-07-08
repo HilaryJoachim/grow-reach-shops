@@ -81,11 +81,11 @@ export function SiteFooter() {
                 rel="noopener"
                 className="hover:text-primary"
               >
-                +255 697 858 009
+                +91 690 929 8493
               </a>
             </li>
             <li className="flex items-center gap-2">
-              <Mail className="h-4 w-4 text-primary" /> orders@afroglow.com
+              <Mail className="h-4 w-4 text-primary" /> Afroglowtz@gmail.com
             </li>
             <li className="flex items-center gap-2">
               <MapPin className="h-4 w-4 text-primary" /> Dar es Salaam, Tanzania

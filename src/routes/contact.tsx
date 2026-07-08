@@ -30,12 +30,12 @@ export const Route = createFileRoute("/contact")({
         >
           <MessageCircle className="h-7 w-7" />
           <div className="font-display text-xl mt-4">WhatsApp</div>
-          <div className="text-sm opacity-80 mt-1">+255 697 858 009</div>
+          <div className="text-sm opacity-80 mt-1">+91 690 929 8493</div>
         </a>
         <div className="bg-card border border-border rounded-lg p-6">
           <Mail className="h-7 w-7 text-primary" />
           <div className="font-display text-xl mt-4">Email</div>
-          <div className="text-sm text-muted-foreground mt-1">orders@afroglow.com</div>
+          <div className="text-sm text-muted-foreground mt-1">Afroglowtz@gmail.com</div>
         </div>
         <div className="bg-card border border-border rounded-lg p-6 sm:col-span-2">
           <MapPin className="h-7 w-7 text-primary" />

@@ -37,7 +37,7 @@ const BRAND_GROUPS = [
     ],
   },
   {
-    label: "Afro Wear",
+    label: "Afro Gear",
     slug: "afro-wear",
     children: [
       { label: "Men Wear", slug: "men-wear" },

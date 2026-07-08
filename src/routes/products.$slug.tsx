@@ -88,7 +88,7 @@ Please contact me to confirm.`;
           <div className="text-xs uppercase tracking-widest text-primary font-semibold">
             {product.category_slug.replace(/-/g, " ")}
           </div>
-          <h1 className="font-display text-3xl md:text-5xl mt-1">{product.name}</h1>
+          <h1 className="font-semibold text-2xl md:text-3xl leading-tight text-foreground/90 mt-1">{product.name}</h1>
           <p className="mt-3 text-muted-foreground">{product.description}</p>
 
           <div className="mt-6 bg-secondary rounded-lg p-5">

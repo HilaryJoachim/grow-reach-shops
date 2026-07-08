@@ -58,15 +58,14 @@ export function ProductCard({ p }: { p: ProductCardData }) {
           <span className="font-semibold text-foreground">{formatTsh(p.wholesale_price)}</span> @{" "}
           {p.moq}+
         </div>
-        <div className="mt-3 flex flex-col 2xl:flex-row gap-2">
-          <Button asChild variant="outline" size="sm" className="flex-1">
+        <div className="mt-3 grid grid-cols-2 gap-2">
+          <Button asChild variant="outline" className="w-full px-1">
             <Link to="/products/$slug" params={{ slug: p.slug }}>
               Details
             </Link>
           </Button>
           <Button
-            size="sm"
-            className="flex-1"
+            className="w-full px-1"
             onClick={() => {
               add({
                 id: p.id,
@@ -80,7 +79,8 @@ export function ProductCard({ p }: { p: ProductCardData }) {
               toast.success(`${p.name} added to cart`);
             }}
           >
-            <ShoppingBag className="h-4 w-4 mr-1" /> Add
+            <ShoppingBag className="h-4 w-4 mr-1 sm:mr-2" />
+            <span>Add</span>
           </Button>
         </div>
       </div>

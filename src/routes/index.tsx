@@ -83,7 +83,7 @@ const HERO_SLIDES = [
     headlineAccent: [false, false, true],
     body: "Men's & women's activewear and gym accessories — built for performance, designed to stand out.",
     cta: "Shop Afro Gear",
-    ctaSearch: { category: "afro-wear" },
+    ctaSearch: { category: "afro-gear" },
     image: heroGym, // ← Slide 3 image (swap heroGym to any imported asset)
     imageAlt: "Athlete wearing AFROGLOW gym apparel",
     imageBadge: "Gym & Wear",

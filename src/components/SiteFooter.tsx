@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { MessageCircle, Mail, MapPin } from "lucide-react";
 import { whatsappLink } from "@/lib/whatsapp";
-import logo from "@/assets/afrologo2.jpg";
+import logo from "@/assets/afrologo2.png";
 
 export function SiteFooter() {
   return (

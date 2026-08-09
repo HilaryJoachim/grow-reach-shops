@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useCart } from "@/lib/cart";
 import { whatsappLink } from "@/lib/whatsapp";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/afrologo2.jpg";
+import logo from "@/assets/afrologo2.png";
 
 const SHOP_GROUPS = [
   { label: "Afro Glow", category: "afro-glow" },

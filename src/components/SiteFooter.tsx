@@ -9,9 +9,7 @@ export function SiteFooter() {
       <div className="container mx-auto px-4 py-14 grid gap-10 md:grid-cols-4">
         <div>
           <div className="flex items-center gap-2">
-            <div className="bg-white p-1.5 rounded-sm flex items-center justify-center">
-              <img src={logo} alt="AFROGLOW Logo" className="h-12 w-auto" />
-            </div>
+            <img src={logo} alt="AFROGLOW Logo" className="h-12 w-auto" />
             <div className="font-display text-2xl">AFROGLOW</div>
           </div>
           <p className="mt-3 text-sm text-white/70 max-w-xs">

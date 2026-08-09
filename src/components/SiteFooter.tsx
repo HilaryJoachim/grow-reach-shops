@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { MessageCircle, Mail, MapPin } from "lucide-react";
 import { whatsappLink } from "@/lib/whatsapp";
-import logo from "@/assets/afrologo2.png";
+import logo from "@/assets/afrologo2.jpg";
 
 export function SiteFooter() {
   return (
@@ -9,8 +9,8 @@ export function SiteFooter() {
       <div className="container mx-auto px-4 py-14 grid gap-10 md:grid-cols-4">
         <div>
           <div className="flex items-center gap-2">
-            <div className="bg-white p-1 rounded-sm flex items-center justify-center">
-              <img src={logo} alt="AFROGLOW Logo" className="h-9 w-auto" />
+            <div className="bg-white p-1.5 rounded-sm flex items-center justify-center">
+              <img src={logo} alt="AFROGLOW Logo" className="h-12 w-auto" />
             </div>
             <div className="font-display text-2xl">AFROGLOW</div>
           </div>

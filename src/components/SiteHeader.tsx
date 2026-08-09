@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useCart } from "@/lib/cart";
 import { whatsappLink } from "@/lib/whatsapp";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/afrologo2.png";
+import logo from "@/assets/afrologo2.jpg";
 
 const SHOP_GROUPS = [
   { label: "Afro Glow", category: "afro-glow" },
@@ -35,8 +35,8 @@ export function SiteHeader() {
       <div className="container mx-auto flex items-center justify-between px-4 py-4">
         <Link to="/" className="flex items-center gap-2">
           {/* 2. Update the img tag like this: */}
-          <div className="bg-white p-1 rounded-sm flex items-center justify-center">
-            <img src={logo} alt="AFROGLOW Logo" className="h-10 w-auto" />
+          <div className="bg-white p-1.5 rounded-sm flex items-center justify-center">
+            <img src={logo} alt="AFROGLOW Logo" className="h-14 w-auto" />
           </div>
         </Link>
         <nav className="hidden lg:flex items-center gap-8 text-sm font-medium">

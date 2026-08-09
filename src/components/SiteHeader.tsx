@@ -28,14 +28,16 @@ export function SiteHeader() {
             rel="noopener"
             className="hidden sm:inline text-primary hover:underline"
           >
-            +91 690 929 8493
+            +255 750 892 900
           </a>
         </div>
       </div>
       <div className="container mx-auto flex items-center justify-between px-4 py-4">
         <Link to="/" className="flex items-center gap-2">
           {/* 2. Update the img tag like this: */}
-          <img src={logo} alt="AFROGLOW Logo" className="h-10 w-auto" />
+          <div className="bg-white p-1 rounded-sm flex items-center justify-center">
+            <img src={logo} alt="AFROGLOW Logo" className="h-10 w-auto" />
+          </div>
         </Link>
         <nav className="hidden lg:flex items-center gap-8 text-sm font-medium">
           <Link
